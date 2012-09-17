@@ -5,5 +5,7 @@ print ""
 json = cjson.decode(io.read('*all'))
 for _, x in ipairs(json.events) do
   _, _, body = string.find(x.message.text, '^!lua (.*)')
-  io.write(loadstring(string.format('return %s', body))())
+  if body then
+    io.write(loadstring(string.format('return %s', body))())
+  end
 end
