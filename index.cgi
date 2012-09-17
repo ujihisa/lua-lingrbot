@@ -1,4 +1,6 @@
 #!/usr/bin/lua
+cjson = require 'cjson'
 print "Content-Type: text/plain"
 print ""
-io.write(io.read())
+json = cjson.decode(io.read())
+io.write(json[0].message.nickname)
