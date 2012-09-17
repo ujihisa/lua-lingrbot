@@ -3,4 +3,6 @@ cjson = require 'cjson'
 print "Content-Type: text/plain"
 print ""
 json = cjson.decode(io.read('*all'))
-io.write(json.events[1].message.nickname)
+for _, x in ipairs(json.events) do
+  io.write(x.message.nickname)
+end
