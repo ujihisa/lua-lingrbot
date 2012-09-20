@@ -8,6 +8,6 @@ for _, x in ipairs(json.events) do
   if body and x.message.room == 'computer_science' then
     io = {write = io.write}
     os = {date = os.date}
-    io.write(loadstring(string.format('return (function () (%s) end)()', body))())
+    io.write(loadstring(string.format('return (function () %s end)()', body))())
   end
 end
