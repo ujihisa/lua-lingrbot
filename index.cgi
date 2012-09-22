@@ -9,6 +9,6 @@ _(json.events):each(function(x)
   if body and x.message.room == 'computer_science' then
     io = {write = io.write}
     os = {date = os.date}
-    loadstring(string.format('io.write(tostring(%s))', body))()
+    assert(loadstring(string.format('io.write(tostring(%s))', body)))()
   end
 end)
