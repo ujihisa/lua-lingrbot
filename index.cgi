@@ -2,6 +2,7 @@
 cjson = require 'cjson'
 _ = require 'underscore'
 print "Content-Type: text/plain"
+print "Content-Length: 1024"
 print ""
 json = cjson.decode(io.read('*all'))
 _(json.events):each(function(x)
