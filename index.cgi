@@ -5,7 +5,7 @@ print "Content-Type: text/plain"
 print "Content-Length: 1"
 print ""
 json = cjson.decode(io.read('*all'))
-_(json.events):chain():map(function(x)
+local result = _(json.events):chain():map(function(x)
   return {select(3, string.find(x.message.text, '^!lua (.*)')), x.message}
 end):filter(function(xs)
   local body, message = xs[1], xs[2]
@@ -14,5 +14,7 @@ end):map(function(xs)
   body, message = xs[1], xs[2]
   io = {write = io.write}
   os = {date = os.date, time = os.time}
-  assert(loadstring(string.format('io.write(tostring(%s))', body)))()
-end)
+  return assert(loadstring(string.format('return tostring(%s)', body)))()
+end):join("\n"):value()
+
+io.write(result)
