@@ -15,6 +15,6 @@ end):map(function(xs)
 end):join("\n"):value()
 
 print "Content-Type: text/plain"
-print string.format("Content-Length: %d", #result)
+print(string.format("Content-Length: %d", #result))
 print ""
 io.write(result)
