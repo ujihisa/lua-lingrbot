@@ -1,9 +1,6 @@
 #!/usr/bin/lua
 cjson = require 'cjson'
 _ = require 'underscore'
-print "Content-Type: text/plain"
-print "Content-Length: 1"
-print ""
 json = cjson.decode(io.read('*all'))
 local result = _(json.events):chain():map(function(x)
   return {select(3, string.find(x.message.text, '^!lua (.*)')), x.message}
@@ -17,4 +14,7 @@ end):map(function(xs)
   return assert(loadstring(string.format('return tostring(%s)', body)))()
 end):join("\n"):value()
 
+print "Content-Type: text/plain"
+print string.format("Content-Length: %d", #result)
+print ""
 io.write(result)
